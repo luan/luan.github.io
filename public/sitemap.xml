@@ -1,11 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://yoursite.com/blog/archives/</loc>
-        <lastmod>2012-03-17T10:13:13-03:00</lastmod>
+        <loc>
+            http://blog.luansantos.com/blog/2012/03/06/using-facebook-js-sdk-with-ember-dot-js/
+        </loc>
+        <lastmod>2012-03-17T10:47:04-03:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/</loc>
-        <lastmod>2012-03-17T10:13:13-03:00</lastmod>
+        <loc>http://blog.luansantos.com/blog/archives/</loc>
+        <lastmod>2012-03-17T10:47:04-03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.luansantos.com/</loc>
+        <lastmod>2012-03-17T10:47:04-03:00</lastmod>
     </url>
 </urlset>

@@ -1,16 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2012-03-17T10:15:18-03:00</updated>
-  <id>http://yoursite.com/</id>
+  <title><![CDATA[Luan Santos Blog]]></title>
+  <link href="http://blog.luansantos.com/atom.xml" rel="self"/>
+  <link href="http://blog.luansantos.com/"/>
+  <updated>2012-03-17T10:56:51-03:00</updated>
+  <id>http://blog.luansantos.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
-    
+    <name><![CDATA[Luan Santos]]></name>
+    <email><![CDATA[luan@luansantos.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Facebook JS SDK with Ember.js]]></title>
+    <link href="http://blog.luansantos.com/blog/2012/03/06/using-facebook-js-sdk-with-ember-dot-js/"/>
+    <updated>2012-03-06T10:25:00-03:00</updated>
+    <id>http://blog.luansantos.com/blog/2012/03/06/using-facebook-js-sdk-with-ember-dot-js</id>
+    <content type="html"><![CDATA[<p>This is my first blog post and it will be as simple as that.</p>
+
+<h3>Using the ember-facebook library</h3>
+
+<p>I wrote a (<em>really</em>) simples addon for <a href="http://www.emberjs.com">Ember.js</a> to automatically load the <a href="https://developers.facebook.com/docs/reference/javascript/">facebook javascript sdk</a>, it&#8217;s called <a href="http://www.github.com/luan/ember-facebook">ember-facebook</a> as you&#8217;d expect.</p>
+
+<p>To use it you just have to download the compiled js file from the downloads page on the github repository. The library is written in <a href="http://coffeescript.org">CoffeeScript</a> and I do <a href="http://arcturo.github.com/library/coffeescript/">love CoffeeScript</a>.</p>
+
+<p><a href="https://github.com/downloads/luan/ember-facebook/ember-facebook.js">Download ember-facebook.js</a></p>
+
+<p>Once you done it include it right after the actual Ember.js file, and before your application one, do it as you are used to.</p>
+
+<p>Right now you can use it like this, on your application creation include the Facebook Mixin:</p>
+
+<figure class='code'><figcaption><span>Application Configuration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">App = </span><span class="nx">Em</span><span class="p">.</span><span class="nx">Application</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Em</span><span class="p">.</span><span class="nx">Facebook</span><span class="p">)</span>
+</span><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">set</span> <span class="s1">&#39;appId&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAppId&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>And it will graciously load the Facebook JS SDK for you, you don&#8217;t have to do anything else. Now you are able to use the <code>FB</code> object to call Facebook&#8217;s API, and we assigned a FBUser to your App to reffer to the logged in user.
+If you want a login button you can do something like this:</p>
+
+<figure class='code'><figcaption><span>Simple login/logout buttons</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{{#if App.FBUser}}
+</span><span class='line'>  <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;img</span> <span class="err">{{</span><span class="na">bindAttr</span> <span class="na">src=</span><span class="s">&quot;App.FBUser.picture&quot;</span> <span class="na">alt=</span><span class="s">&quot;App.FBUser.name&quot;</span><span class="err">}}</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    {{App.FBUser.name}}
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="err">{{</span><span class="na">action</span> <span class="err">&quot;</span><span class="na">logout</span><span class="err">&quot;</span> <span class="na">target=</span><span class="s">&quot;FB&quot;</span><span class="err">}}</span><span class="nt">&gt;</span>Logout<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>{{else}}
+</span><span class='line'>  {{#view Em.FacebookView type=&quot;login-button&quot; data-size=&quot;xlarge&quot;
+</span><span class='line'>                          data-scope=&quot;email, offline_access&quot;}}
+</span><span class='line'>    Connect
+</span><span class='line'>  {{/view}}
+</span><span class='line'>{{/if}}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that we are checking for the existance of App.FBUser and then displaying the user names and picture together with a logout link if the user is present OR we show a custom view called FacebookView that basically creates a view of the Facebook SDK, you can check more on their documentation.</p>
+
+<p>Basically we create a button with the xlarge size and ask for the scopes &#8220;email&#8221; and &#8220;offline_access&#8221; with the content &#8220;Connect&#8221;.</p>
+
+<p>You can customize it however. You could either create a link to that, just bindint the action &#8220;login&#8221; to the target &#8220;FB&#8221; (as we did with logout).</p>
+
+<h3>Creating the ember-facebook library</h3>
+
+<p>The <a href="https://github.com/luan/ember-facebook/blob/master/src/ember-facebook.coffee">sources</a> for the library are really really simple. I basically observes the &#8220;appId&#8221; attribute and when that changes it loads the Facebook JS SDK for that app.</p>
+
+<p>Whenever the user changes (login, logout, app authorization, etc) the method <code>updateFBUser</code> is called, updating the App.FBUser object on your application. You can do whatever you want with this binding, observe it, put it in the DOM, whatever.</p>
+
+<p>We also have a App.FBloading binding which is a boolean that basically tells that we are waiting a facebook response.</p>
+
+<p>You might want to show something based on this:</p>
+
+<figure class='code'><figcaption><span>Fancy Loading</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{{#if App.FBloading}}
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;my-fancy-loading&quot;</span><span class="nt">&gt;</span>Waiting for Facebook<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>{{/if}}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>That&#8217;s all folks</h3>
+
+<p>I hope you like it, as it being my first post it might look retarded, but I hope it was helpful for someone.</p>
+
+<p>See ya!</p>
+]]></content>
+  </entry>
   
 </feed>
