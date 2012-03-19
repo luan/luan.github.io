@@ -8,6 +8,9 @@ categories:
   - Ember.js
   - CoffeeScript
 ---
+
+{% raw %}
+
 This is my first blog post and it will be as simple as that.
 
 ### Using the ember-facebook library
@@ -74,3 +77,5 @@ You might want to show something based on this:
 I hope you like it, as it being my first post it might look retarded, but I hope it was helpful for someone.
 
 See ya!
+
+{% endraw %}

@@ -4,7 +4,7 @@
   <title><![CDATA[Luan Santos Blog]]></title>
   <link href="http://blog.luansantos.com/atom.xml" rel="self"/>
   <link href="http://blog.luansantos.com/"/>
-  <updated>2012-03-17T11:03:06-03:00</updated>
+  <updated>2012-03-19T15:11:27-03:00</updated>
   <id>http://blog.luansantos.com/</id>
   <author>
     <name><![CDATA[Luan Santos]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Ember FormBuilder]]></title>
+    <link href="http://blog.luansantos.com/2012/03/19/introducing-ember-formbuilder/"/>
+    <updated>2012-03-19T14:36:00-03:00</updated>
+    <id>http://blog.luansantos.com/2012/03/19/introducing-ember-formbuilder</id>
+    <content type="html"><![CDATA[<p>I was hacking around with Ember.js and had to do a kind of complex form.
+All fields were bound to one object and I had a hard time styling and binding everything.
+While doing this I got myself thinking of <a href="https://github.com/plataformatec/simple_form">simple_form</a>
+and how it would be helping me if I could use it.</p>
+
+<p>And why not create a form builder for Ember? Yeah why not, I decided to try. I can&#8217;t say I failed
+miserably because the idea is cool, I like what I wrote in the <a href="https://github.com/luan/ember-formbuilder/blob/master/README.md">README</a>
+and how things are defined to work. But no doubt the code ended up a pile of crap,
+complicated, hard to understand and hard to evolve from.</p>
+
+<!-- more -->
+
+
+<p>This post is about the idea. And to tell you guys that I will now rewrite it (yeah I know,
+I&#8217;m rewriting a project that has what, 2 days life? But one should fail ASAP).</p>
+
+<p>Any help is appreciated, I&#8217;m really new to testing javascript (and to testing at all)
+but I&#8217;m finding my way in that. Now let&#8217;s talk about the form builder.</p>
+
+<h1>Ember FormBuilder</h1>
+
+<p>Based on simple_form primarily Ember FormBuilder aims to be the toolkit to build from basic to
+complex forms that binds automatically to your ember objects. It&#8217;s really customizable by just
+defining a mixin with your markup definitions, just like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">Bootstrap = </span><span class="nx">Ember</span><span class="p">.</span><span class="nx">Mixin</span><span class="p">.</span><span class="nx">create</span>
+</span><span class='line'>  <span class="nv">wrapperTag: </span><span class="s1">&#39;div&#39;</span>
+</span><span class='line'>  <span class="nv">wrapperClass: </span><span class="s1">&#39;control-group&#39;</span>
+</span><span class='line'>  <span class="nv">inputWrapperTag: </span><span class="s1">&#39;div&#39;</span>
+</span><span class='line'>  <span class="nv">inputWrapperClass: </span><span class="s1">&#39;controls&#39;</span>
+</span><span class='line'>  <span class="nv">labelClass: </span><span class="s1">&#39;control-label&#39;</span>
+</span><span class='line'>  <span class="nv">helpTag: </span><span class="s1">&#39;p&#39;</span>
+</span><span class='line'>  <span class="nv">helpClass: </span><span class="s1">&#39;help-block&#39;</span>
+</span><span class='line'>  <span class="nv">errorTag: </span><span class="s1">&#39;span&#39;</span>
+</span><span class='line'>  <span class="nv">errorClass: </span><span class="s1">&#39;help-inline&#39;</span>
+</span><span class='line'>  <span class="nv">formClass: </span><span class="s1">&#39;form-vertical&#39;</span>
+</span><span class='line'>  <span class="nv">submitClass: </span><span class="s1">&#39;btn btn-success&#39;</span>
+</span><span class='line'>  <span class="nv">cancelClass: </span><span class="s1">&#39;btn btn-danger&#39;</span>
+</span><span class='line'><span class="nx">Ember</span><span class="p">.</span><span class="nx">FormBuilder</span><span class="p">.</span><span class="nx">pushMixin</span><span class="p">(</span><span class="nx">Bootstrap</span><span class="p">,</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you are familiar to simple_form syntax the handlebars helpers we define will be just the
+thing you were looking for. You can define a form with <code>{{#formFor "object"}}</code> and define
+imputs with <code>{{input "name"}}</code>. As simple as that. You can find out more about it by reading
+the <a href="https://github.com/luan/ember-formbuilder/blob/master/README.md">README</a> on github.</p>
+
+<p>There is also support for some kind of internationalization, I say somekind because you
+set an object <code>Ember.FormBuilder.STRINGS</code> with some string values (again refer to README
+here) and you have to work your way to make it internationalized in there, it&#8217;s something
+to be thought further later, but that&#8217;s another subject for another time.</p>
+
+<h1>Ok</h1>
+
+<p>Yeah I mean, that&#8217;s the whole thing. I just wanted to show that. I will rewrite it now
+using decent patterns and making things more reusable and easier to understand. Will
+write decent unit tests and integration tests too, currently there is just a bunch of
+weird tests that I don&#8217;t belive that covers much of it.</p>
+
+<p>The code is in github <a href="https://github.com/luan/ember-formbuilder">here</a> and if you
+have time and want to help I would be delighted. Of course, read the README and
+point out flaws if you see some.</p>
+
+<p>Thanks for reading, good bye.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Facebook JS SDK with Ember.js]]></title>
