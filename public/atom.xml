@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Luan Santos]]></title>
-  <link href="http://luan.santos.com/atom.xml" rel="self"/>
-  <link href="http://luan.santos.com/"/>
-  <updated>2012-07-13T14:59:51-03:00</updated>
-  <id>http://luan.santos.com/</id>
+  <link href="http://luan.github.com/atom.xml" rel="self"/>
+  <link href="http://luan.github.com/"/>
+  <updated>2012-07-13T15:06:25-03:00</updated>
+  <id>http://luan.github.com/</id>
   <author>
     <name><![CDATA[Luan Santos]]></name>
     <email><![CDATA[luan@luansantos.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introducing Ember FormBuilder]]></title>
-    <link href="http://luan.santos.com/2012/03/19/introducing-ember-formbuilder/"/>
+    <link href="http://luan.github.com/2012/03/19/introducing-ember-formbuilder/"/>
     <updated>2012-03-19T14:36:00-03:00</updated>
-    <id>http://luan.santos.com/2012/03/19/introducing-ember-formbuilder</id>
+    <id>http://luan.github.com/2012/03/19/introducing-ember-formbuilder</id>
     <content type="html"><![CDATA[<p>I was hacking around with Ember.js and had to do a kind of complex form.
 All fields were bound to one object and I had a hard time styling and binding everything.
 While doing this I got myself thinking of <a href="https://github.com/plataformatec/simple_form">simple_form</a>
@@ -101,9 +101,9 @@ point out flaws if you see some.</p>
   
   <entry>
     <title type="html"><![CDATA[Using Facebook JS SDK with Ember.js]]></title>
-    <link href="http://luan.santos.com/2012/03/06/using-facebook-js-sdk-with-emberjs/"/>
+    <link href="http://luan.github.com/2012/03/06/using-facebook-js-sdk-with-emberjs/"/>
     <updated>2012-03-06T10:25:00-03:00</updated>
-    <id>http://luan.santos.com/2012/03/06/using-facebook-js-sdk-with-emberjs</id>
+    <id>http://luan.github.com/2012/03/06/using-facebook-js-sdk-with-emberjs</id>
     <content type="html"><![CDATA[<p>This is my first blog post and it will be as simple as that.</p>
 
 <h3>Using the ember-facebook library</h3>
