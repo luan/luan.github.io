@@ -1,14 +1,33 @@
 {% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
 {% include head.html %}
-<body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
-  <header role="banner">{% include header.html %}</header>
-  <nav role="navigation">{% include navigation.html %}</nav>
-  <div id="main">
-    <div id="content">
-      {{ content | expand_urls: root_url }}
-    </div>
-  </div>
-  <footer role="contentinfo">{% include footer.html %}</footer>
-  {% include after_footer.html %}
+
+<body>
+	<header id="header" class="inner">{% include header.html %}</header>
+  <section class="inner">
+    <aside class="sidebar">
+      <div class="avatar">
+        <img src="http://en.gravatar.com/userimage/15866399/b4b6c68958d26d377622886b3b3f7dfe.jpg?size=150" alt="" />
+      </div>
+      {{ site.subtitle }}
+
+      {% include asides/recent_posts.html %}
+      {% include asides/github.html %}
+      {% include asides/twitter.html %}
+
+      <footer id="footer">{% include footer.html %}</footer>
+      {% include after_footer.html %}
+    </aside>
+    <div id="content">{{ content | expand_urls: root_url }}</div>
+  </section>
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
 </body>
 </html>

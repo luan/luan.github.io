@@ -1,0 +1,32 @@
+aside.sidebar {
+  float: left;
+  padding-top: 30px;
+  width: 260px;
+  
+  a {
+    color: $color-link;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  h1 {
+    color: $color-main;
+    margin-bottom: 10px;
+  }
+
+  section {
+    border-bottom: 1px solid $color-gray03;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      padding: 5px;
+    }
+  }
+}

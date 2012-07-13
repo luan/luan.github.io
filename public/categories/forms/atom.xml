@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Forms | Luan Santos Blog]]></title>
-  <link href="http://blog.luansantos.com/categories/forms/atom.xml" rel="self"/>
-  <link href="http://blog.luansantos.com/"/>
-  <updated>2012-03-19T15:11:27-03:00</updated>
-  <id>http://blog.luansantos.com/</id>
+  <title><![CDATA[Category: Forms | Luan Santos]]></title>
+  <link href="http://luan.santos.com/categories/forms/atom.xml" rel="self"/>
+  <link href="http://luan.santos.com/"/>
+  <updated>2012-07-13T14:59:51-03:00</updated>
+  <id>http://luan.santos.com/</id>
   <author>
     <name><![CDATA[Luan Santos]]></name>
     <email><![CDATA[luan@luansantos.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introducing Ember FormBuilder]]></title>
-    <link href="http://blog.luansantos.com/2012/03/19/introducing-ember-formbuilder/"/>
+    <link href="http://luan.santos.com/2012/03/19/introducing-ember-formbuilder/"/>
     <updated>2012-03-19T14:36:00-03:00</updated>
-    <id>http://blog.luansantos.com/2012/03/19/introducing-ember-formbuilder</id>
+    <id>http://luan.santos.com/2012/03/19/introducing-ember-formbuilder</id>
     <content type="html"><![CDATA[<p></p>
 
 <p>I was hacking around with Ember.js and had to do a kind of complex form.

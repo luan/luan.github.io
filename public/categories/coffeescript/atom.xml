@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: CoffeeScript | Luan Santos Blog]]></title>
-  <link href="http://blog.luansantos.com/categories/coffeescript/atom.xml" rel="self"/>
-  <link href="http://blog.luansantos.com/"/>
-  <updated>2012-03-19T15:11:27-03:00</updated>
-  <id>http://blog.luansantos.com/</id>
+  <title><![CDATA[Category: CoffeeScript | Luan Santos]]></title>
+  <link href="http://luan.santos.com/categories/coffeescript/atom.xml" rel="self"/>
+  <link href="http://luan.santos.com/"/>
+  <updated>2012-07-13T14:59:51-03:00</updated>
+  <id>http://luan.santos.com/</id>
   <author>
     <name><![CDATA[Luan Santos]]></name>
     <email><![CDATA[luan@luansantos.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introducing Ember FormBuilder]]></title>
-    <link href="http://blog.luansantos.com/2012/03/19/introducing-ember-formbuilder/"/>
+    <link href="http://luan.santos.com/2012/03/19/introducing-ember-formbuilder/"/>
     <updated>2012-03-19T14:36:00-03:00</updated>
-    <id>http://blog.luansantos.com/2012/03/19/introducing-ember-formbuilder</id>
+    <id>http://luan.santos.com/2012/03/19/introducing-ember-formbuilder</id>
     <content type="html"><![CDATA[<p></p>
 
 <p>I was hacking around with Ember.js and had to do a kind of complex form.
@@ -91,9 +91,9 @@ point out flaws if you see some.</p>
   
   <entry>
     <title type="html"><![CDATA[Using Facebook JS SDK with Ember.js]]></title>
-    <link href="http://blog.luansantos.com/2012/03/06/using-facebook-js-sdk-with-emberjs/"/>
+    <link href="http://luan.santos.com/2012/03/06/using-facebook-js-sdk-with-emberjs/"/>
     <updated>2012-03-06T10:25:00-03:00</updated>
-    <id>http://blog.luansantos.com/2012/03/06/using-facebook-js-sdk-with-emberjs</id>
+    <id>http://luan.santos.com/2012/03/06/using-facebook-js-sdk-with-emberjs</id>
     <content type="html"><![CDATA[<p></p>
 
 <p>This is my first blog post and it will be as simple as that.</p>
