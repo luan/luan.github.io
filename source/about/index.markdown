@@ -13,7 +13,7 @@ But I also like other programming languages like Javascript and C. I worked as a
 
 I love music, all of it, specially Brazilian and punk rock. Rise Against is the best band out there. I'm also a singer in my meantime.
 
-I also love soccer, love [Coritiba](http://coritiba.com.br) , the most victorious team in the world.
+I also love soccer, love [Coritiba](http://coritiba.com.br), the most victorious team in the world.
 
 Kau is my wife and my full-time companion, thank's my love!
 
