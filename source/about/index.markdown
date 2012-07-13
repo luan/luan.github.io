@@ -9,7 +9,6 @@ footer: true
 
 My name is Luan Santos, I'm addicted to Ruby.
 
-Me and Kau
 But I also like other programming languages like Javascript and C. I worked as a [Rails](http://rubyonrails.org/)  developer on [Shuffler.fm](http://shuffler.fm) . Now I am on Go2nPlay doing some crazy stuff on every web technology I know.
 
 I love music, all of it, specially Brazilian and punk rock. Rise Against is the best band out there. I'm also a singer in my meantime.
