@@ -2,6 +2,11 @@ aside.sidebar {
   float: left;
   padding-top: 30px;
   width: 260px;
+
+  @media screen and (max-width: 1040px) {
+    float: none;
+    width: 95%;
+  }
   
   a {
     color: $color-link;
@@ -30,3 +35,4 @@ aside.sidebar {
     }
   }
 }
+
