@@ -4,6 +4,7 @@
 <body>
 	<header id="header" class="inner">{% include header.html %}</header>
   <section class="inner">
+    <div id="content">{{ content | expand_urls: root_url }}</div>
     <aside class="sidebar">
       <div class="avatar">
         <img src="http://en.gravatar.com/userimage/15866399/b4b6c68958d26d377622886b3b3f7dfe.jpg?size=150" alt="" />
@@ -17,7 +18,6 @@
       <footer id="footer">{% include footer.html %}</footer>
       {% include after_footer.html %}
     </aside>
-    <div id="content">{{ content | expand_urls: root_url }}</div>
   </section>
 
   <script type="text/javascript">
