@@ -5,7 +5,11 @@
     <li class="loading">Status updating...</li>
   </ul>
   {% if site.github_show_profile_link %}
-  <a href="https://github.com/{{site.github_user}}">@{{site.github_user}}</a> on GitHub
+  <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user={{ site.github_user }}&type=follow&count=true"
+          allowtransparency="true" frameborder="0" scrolling="0" width="165px" height="20px"></iframe>
+    <iframe style="border: 0; margin: 0; padding: 0;"
+      src="https://www.gittip.com/{{ site.github_user }}/widget.html" 
+          width="48pt" height="20pt"></iframe>
   {% endif %}
   <script type="text/javascript">
     $.domReady(function(){
