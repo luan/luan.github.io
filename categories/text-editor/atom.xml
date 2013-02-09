@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Text Editor | Luan Santos]]></title>
+  <link href="http://luan.github.com/categories/text-editor/atom.xml" rel="self"/>
+  <link href="http://luan.github.com/"/>
+  <updated>2013-02-09T02:05:31-08:00</updated>
+  <id>http://luan.github.com/</id>
+  <author>
+    <name><![CDATA[Luan Santos]]></name>
+    <email><![CDATA[luan@luansantos.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[You Are Using Your Editor Wrong]]></title>
+    <link href="http://luan.github.com/2012/08/01/you-are-using-your-editor-wrong/"/>
+    <updated>2012-08-01T21:57:00-07:00</updated>
+    <id>http://luan.github.com/2012/08/01/you-are-using-your-editor-wrong</id>
+    <content type="html"><![CDATA[<p></p>
+
+<p><em>And the wrong editor!</em></p>
+
+<p>You always hear people saying their editor is the best, that everyone should use
+it and bla bla bla. I do that myself, Vim is the best, you should use it.</p>
+
+<p>You also hear "you should do <em>xx</em> this way, you will be more productive". And
+then your hear back from the other side "nah, it doesn't matter, use anything,
+anyway, it will do the same job".</p>
+
+<p>Everyone has opinions about this, and I want to analyze it and give mine.</p>
+
+<p><em>And you are not doing anything wrong, in fact, you are absolutely correct!</em></p>
+
+<!-- more -->
+
+
+<p>I seriously don't think anyone is right, or wrong. It really depends on the
+person. I read an article about switching to Vim by the awesome Yehuda Katz (he
+is really awesome) stating that you should just open Vim and use it like a
+conventional editor (arrow keys, mouse, etc)
+<a href="http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/">the article</a>.</p>
+
+<p>That could have worked for him, and it has definitely worked for some of my
+friends also, but not for me, I had to follow the regular path of doing
+everything the vim way, disable arrow keys, disable mouse, and FORCE me to do
+everything on the way that Vim wanted me to do.</p>
+
+<h1>Where Am I At The Text Editing World</h1>
+
+<p>I am a Vim user, I use Vim for everything, I have Vim bindings on my Chrome, I
+love that the official OSX twitter client has Vim bindings, I love that Gmail
+and Sparrow (RIP) have it too. I don't know how to navigate anything without <code>j</code>
+and <code>k</code>.</p>
+
+<p>I consider myself good at Vim, I use Vim modal editing to extreme, I am not one
+of those guys you get astonished when you see typing, tho.</p>
+
+<p>I have used plenty of text editors and IDEs in my life. Including Aptana (Rad
+Rails), Textmate, Red Car, Sublime Text 2, Chocolat, Emacs, etc. I have
+opinions about all of them, and wouldn't feel unconfortable if I had to use some
+of the again (although there are some that I'd rather use a naked vi instead).</p>
+
+<h1>And What The Heck Is Your Opinion?</h1>
+
+<p>Each person has needs and preferences, and everyone is different, everyone has
+it's own "soul mate" text editor. And while I do belive the text editor can
+affect the coding speed I don't think it is significant to justify a text
+editor switch. <a href="http://lateral.netmanagers.com.ar/weblog/posts/your-editor-is-not-the-bottleneck.html">This guys</a>
+opinion is really valid and I agree in the most part.</p>
+
+<p>You should choose your editor based on your personal preferences (and I bet my
+kidney you are already doing it). For some it must be beautiful (a lot of
+people switch to OS X because it's beautiful), for some it must be dead simple,
+for some it should be platform independent.</p>
+
+<p>The part I disagree from that post is that you can code in anything, even in
+kwrite. Even though you CAN, that really depends on the coder needs, I for
+example, NEED <code>ctags</code> and some sort of file jumping good. That given author does
+not need anything, so he can code in anything that accepts keyboard input and
+maybe has some syntax highlighting.</p>
+
+<h1>What I Am Trying To Say</h1>
+
+<p>I am trying to say that you can't be wrong if you are getting your job done. If
+you feel like you can feel better on a different editor, or with more plugins,
+or on a massively slow crazy IDE then just go for it. People will always
+advocate for their own preferences and you can't be judged for using something
+like kwrite, or eclipse, or emacs, or whatever (even though you will be), just
+get your job done right and good using the tools you feel more confortable
+with.</p>
+
+<p>Explore your possibilities, I think everyone should give Vim and Emcas a try.
+Both are awesome and have some different ways of doing things. Vims modal
+editing and macros will blow your mind. And Emacs control-driven commands will
+make your finger hurt. If you are on OS X you should take a look on Coda and
+Chocolat, they have such a cute UI.</p>
+
+<p>I want to finish this by listing my favorite pieces of work on text editing:</p>
+
+<ul>
+<li>Vim (MacVim)</li>
+<li>Sublime Text 2</li>
+<li>Chocolat</li>
+<li>Textmate</li>
+<li>Emacs</li>
+<li>Gedit</li>
+</ul>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+</feed>

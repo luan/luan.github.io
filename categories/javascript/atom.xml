@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JavaScript | Luan Santos]]></title>
+  <link href="http://luan.github.com/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://luan.github.com/"/>
+  <updated>2013-02-09T02:05:31-08:00</updated>
+  <id>http://luan.github.com/</id>
+  <author>
+    <name><![CDATA[Luan Santos]]></name>
+    <email><![CDATA[luan@luansantos.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Ember FormBuilder]]></title>
+    <link href="http://luan.github.com/2012/03/19/introducing-ember-formbuilder/"/>
+    <updated>2012-03-19T14:36:00-07:00</updated>
+    <id>http://luan.github.com/2012/03/19/introducing-ember-formbuilder</id>
+    <content type="html"><![CDATA[<p></p>
+
+<p>I was hacking around with Ember.js and had to do a kind of complex form.
+All fields were bound to one object and I had a hard time styling and binding everything.
+While doing this I got myself thinking of <a href="https://github.com/plataformatec/simple_form">simple_form</a>
+and how it would be helping me if I could use it.</p>
+
+<p>And why not create a form builder for Ember? Yeah why not, I decided to try. I can't say I failed
+miserably because the idea is cool, I like what I wrote in the <a href="https://github.com/luan/ember-formbuilder/blob/master/README.md">README</a>
+and how things are defined to work. But no doubt the code ended up a pile of crap,
+complicated, hard to understand and hard to evolve from.</p>
+
+<!-- more -->
+
+
+<p>This post is about the idea. And to tell you guys that I will now rewrite it (yeah I know,
+I'm rewriting a project that has what, 2 days life? But one should fail ASAP).</p>
+
+<p>Any help is appreciated, I'm really new to testing javascript (and to testing at all)
+but I'm finding my way in that. Now let's talk about the form builder.</p>
+
+<h1>Ember FormBuilder</h1>
+
+<p>Based on simple_form primarily Ember FormBuilder aims to be the toolkit to build from basic to
+complex forms that binds automatically to your ember objects. It's really customizable by just
+defining a mixin with your markup definitions, just like this:</p>
+
+<p><code>coffeescript
+Bootstrap = Ember.Mixin.create
+  wrapperTag: 'div'
+  wrapperClass: 'control-group'
+  inputWrapperTag: 'div'
+  inputWrapperClass: 'controls'
+  labelClass: 'control-label'
+  helpTag: 'p'
+  helpClass: 'help-block'
+  errorTag: 'span'
+  errorClass: 'help-inline'
+  formClass: 'form-vertical'
+  submitClass: 'btn btn-success'
+  cancelClass: 'btn btn-danger'
+Ember.FormBuilder.pushMixin(Bootstrap, "bootstrap")
+</code></p>
+
+<p>If you are familiar to simple_form syntax the handlebars helpers we define will be just the
+thing you were looking for. You can define a form with <code>{{#formFor "object"}}</code> and define
+imputs with <code>{{input "name"}}</code>. As simple as that. You can find out more about it by reading
+the <a href="https://github.com/luan/ember-formbuilder/blob/master/README.md">README</a> on github.</p>
+
+<p>There is also support for some kind of internationalization, I say somekind because you
+set an object <code>Ember.FormBuilder.STRINGS</code> with some string values (again refer to README
+here) and you have to work your way to make it internationalized in there, it's something
+to be thought further later, but that's another subject for another time.</p>
+
+<h1>Ok</h1>
+
+<p>Yeah I mean, that's the whole thing. I just wanted to show that. I will rewrite it now
+using decent patterns and making things more reusable and easier to understand. Will
+write decent unit tests and integration tests too, currently there is just a bunch of
+weird tests that I don't belive that covers much of it.</p>
+
+<p>The code is in github <a href="https://github.com/luan/ember-formbuilder">here</a> and if you
+have time and want to help I would be delighted. Of course, read the README and
+point out flaws if you see some.</p>
+
+<p>Thanks for reading, good bye.</p>
+
+<p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Facebook JS SDK with Ember.js]]></title>
+    <link href="http://luan.github.com/2012/03/06/using-facebook-js-sdk-with-emberjs/"/>
+    <updated>2012-03-06T10:25:00-08:00</updated>
+    <id>http://luan.github.com/2012/03/06/using-facebook-js-sdk-with-emberjs</id>
+    <content type="html"><![CDATA[<p></p>
+
+<p>This is my first blog post and it will be as simple as that.</p>
+
+<h3>Using the ember-facebook library</h3>
+
+<p>I wrote a (<em>really</em>) simples addon for <a href="http://www.emberjs.com">Ember.js</a> to automatically load the <a href="https://developers.facebook.com/docs/reference/javascript/">facebook javascript sdk</a>, it's called <a href="http://www.github.com/luan/ember-facebook">ember-facebook</a> as you'd expect.</p>
+
+<p>To use it you just have to download the compiled js file from the downloads page on the github repository. The library is written in <a href="http://coffeescript.org">CoffeeScript</a> and I do <a href="http://arcturo.github.com/library/coffeescript/">love CoffeeScript</a>.</p>
+
+<p><a href="https://github.com/downloads/luan/ember-facebook/ember-facebook.js">Download ember-facebook.js</a></p>
+
+<p>Once you done it include it right after the actual Ember.js file, and before your application one, do it as you are used to.</p>
+
+<p>Right now you can use it like this, on your application creation include the Facebook Mixin:</p>
+
+<p><code>coffeescript Application Configuration
+App = Em.Application.create(Em.Facebook)
+App.set 'appId', 'YourAppId'
+</code></p>
+
+<!-- more -->
+
+
+<p>And it will graciously load the Facebook JS SDK for you, you don't have to do anything else. Now you are able to use the <code>FB</code> object to call Facebook's API, and we assigned a FBUser to your App to reffer to the logged in user.
+If you want a login button you can do something like this:</p>
+
+<p>```html Simple login/logout buttons
+{{#if App.FBUser}}
+  <div></p>
+
+<pre><code>&lt;img {{bindAttr src="App.FBUser.picture" alt="App.FBUser.name"}} /&gt;
+{{App.FBUser.name}}
+&lt;a href="#" {{action "logout" target="FB"}}&gt;Logout&lt;/a&gt;
+</code></pre>
+
+<p>  </div>
+{{else}}
+  {{#view Em.FacebookView type="login-button" data-size="xlarge"</p>
+
+<pre><code>                      data-scope="email, offline_access"}}
+Connect
+</code></pre>
+
+<p>  {{/view}}
+{{/if}}
+```</p>
+
+<p>Note that we are checking for the existance of App.FBUser and then displaying the user names and picture together with a logout link if the user is present OR we show a custom view called FacebookView that basically creates a view of the Facebook SDK, you can check more on their documentation.</p>
+
+<p>Basically we create a button with the xlarge size and ask for the scopes "email" and "offline_access" with the content "Connect".</p>
+
+<p>You can customize it however. You could either create a link to that, just bindint the action "login" to the target "FB" (as we did with logout).</p>
+
+<h3>Creating the ember-facebook library</h3>
+
+<p>The <a href="https://github.com/luan/ember-facebook/blob/master/src/ember-facebook.coffee">sources</a> for the library are really really simple. I basically observes the "appId" attribute and when that changes it loads the Facebook JS SDK for that app.</p>
+
+<p>Whenever the user changes (login, logout, app authorization, etc) the method <code>updateFBUser</code> is called, updating the App.FBUser object on your application. You can do whatever you want with this binding, observe it, put it in the DOM, whatever.</p>
+
+<p>We also have a App.FBloading binding which is a boolean that basically tells that we are waiting a facebook response.</p>
+
+<p>You might want to show something based on this:</p>
+
+<p><code>html Fancy Loading
+{{#if App.FBloading}}
+  &lt;div class="my-fancy-loading"&gt;Waiting for Facebook&lt;/div&gt;
+{{/if}}
+</code></p>
+
+<h3>That's all folks</h3>
+
+<p>I hope you like it, as it being my first post it might look retarded, but I hope it was helpful for someone.</p>
+
+<p>See ya!</p>
+
+<p></p>
+]]></content>
+  </entry>
+  
+</feed>

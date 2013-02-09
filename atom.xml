@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Luan Santos]]></title>
+  <link href="http://luan.github.com/atom.xml" rel="self"/>
+  <link href="http://luan.github.com/"/>
+  <updated>2013-02-09T02:05:31-08:00</updated>
+  <id>http://luan.github.com/</id>
+  <author>
+    <name><![CDATA[Luan Santos]]></name>
+    <email><![CDATA[luan@luansantos.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying Rails Applications With Mina]]></title>
+    <link href="http://luan.github.com/2012/09/05/deploying-rails-applications-with-mina/"/>
+    <updated>2012-09-05T18:56:00-07:00</updated>
+    <id>http://luan.github.com/2012/09/05/deploying-rails-applications-with-mina</id>
+    <content type="html"><![CDATA[<p>I recently participated on <a href="http://startupdev.com.br/rumble/pt/">StartupDEV Rumble</a>
+with my friend <a href="http://raphaelcosta.net">Raphael Costa</a>. Where we had to develop
+and deploy a web application in 48 hours.</p>
+
+<p>Besides being an awesome experience I learned a new deployment tool which is
+really awesome: Mina.</p>
+
+<!-- more -->
+
+
+<p><a href="http://nadarei.co/mina/">Mina</a> is an awesome tool that deploys your application
+blazingly fast, over a single ssh connection.</p>
+
+<p>The first thing you have to do is set-up your VPS which should be easy enough,
+there are plenty of guides around.</p>
+
+<p>I just wanna share my Mina configuration for now.</p>
+
+<p>First, add mina to your gemfile:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;mina&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then create a file on <code>config/</code> folder call it <code>deploy.rb</code> with these contents
+(watch for CAPS for where you have to change).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;mina/bundler&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;mina/rails&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;mina/git&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Basic settings:</span>
+</span><span class='line'><span class="c1"># domain     - The hostname to SSH to</span>
+</span><span class='line'><span class="c1"># deploy_to  - Path to deploy into</span>
+</span><span class='line'><span class="c1"># repository - Git repo to clone from (needed by mina/git)</span>
+</span><span class='line'><span class="c1"># user       - Username in the  server to SSH to (optional)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">set</span> <span class="ss">:shared_paths</span><span class="p">,</span> <span class="o">[</span>
+</span><span class='line'>  <span class="s1">&#39;config/database.yml&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;config/settings/production.yml&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;log/production.log&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;log/unicorn.log&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;public/system&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s1">&#39;public/uploads&#39;</span>
+</span><span class='line'><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">set</span> <span class="ss">:domain</span><span class="p">,</span> <span class="s1">&#39;YOUR_APP_DOMAIN&#39;</span>
+</span><span class='line'><span class="n">set</span> <span class="ss">:deploy_to</span><span class="p">,</span> <span class="s1">&#39;YOUR_APP_FOLDER&#39;</span>
+</span><span class='line'><span class="n">set</span> <span class="ss">:repository</span><span class="p">,</span> <span class="s1">&#39;YOUR_GIT_REPO&#39;</span>
+</span><span class='line'><span class="n">set</span> <span class="ss">:user</span><span class="p">,</span> <span class="s1">&#39;deployer&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s2">&quot;Deploys the current version to the server.&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:deploy</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">deploy</span> <span class="k">do</span>
+</span><span class='line'>    <span class="c1"># Put things that will set up an empty directory into a fully set-up</span>
+</span><span class='line'>    <span class="c1"># instance of your project.</span>
+</span><span class='line'>    <span class="n">invoke</span> <span class="ss">:&#39;git:clone&#39;</span>
+</span><span class='line'>    <span class="n">invoke</span> <span class="ss">:&#39;deploy:link_shared_paths&#39;</span>
+</span><span class='line'>    <span class="n">invoke</span> <span class="ss">:&#39;bundle:install&#39;</span>
+</span><span class='line'>    <span class="n">invoke</span> <span class="ss">:&#39;rails:db_migrate&#39;</span>
+</span><span class='line'>    <span class="n">invoke</span> <span class="ss">:&#39;rails:assets_precompile&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">to</span> <span class="ss">:launch</span> <span class="k">do</span>
+</span><span class='line'>      <span class="c1"># WATCH HERE FOR YOUR UNICORN/SERVER service</span>
+</span><span class='line'>      <span class="n">queue</span> <span class="s1">&#39;touch tmp/restart.txt&#39;</span>
+</span><span class='line'>      <span class="n">queue</span> <span class="s1">&#39;service unicorn restart&#39;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s2">&quot;Shows logs.&quot;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:logs</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">queue</span> <span class="sx">%[cd </span><span class="si">#{</span><span class="n">deploy_to!</span><span class="si">}</span><span class="sx"> &amp;&amp; tail -f shared/log/production.log]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And really, that&#8217;s all there&#8217;s to it, I might post a full deploy guide soon if
+someone ask for it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[You Are Using Your Editor Wrong]]></title>
+    <link href="http://luan.github.com/2012/08/01/you-are-using-your-editor-wrong/"/>
+    <updated>2012-08-01T21:57:00-07:00</updated>
+    <id>http://luan.github.com/2012/08/01/you-are-using-your-editor-wrong</id>
+    <content type="html"><![CDATA[<p><em>And the wrong editor!</em></p>
+
+<p>You always hear people saying their editor is the best, that everyone should use
+it and bla bla bla. I do that myself, Vim is the best, you should use it.</p>
+
+<p>You also hear &#8220;you should do <em>xx</em> this way, you will be more productive&#8221;. And
+then your hear back from the other side &#8220;nah, it doesn&#8217;t matter, use anything,
+anyway, it will do the same job&#8221;.</p>
+
+<p>Everyone has opinions about this, and I want to analyze it and give mine.</p>
+
+<p><em>And you are not doing anything wrong, in fact, you are absolutely correct!</em></p>
+
+<!-- more -->
+
+
+<p>I seriously don&#8217;t think anyone is right, or wrong. It really depends on the
+person. I read an article about switching to Vim by the awesome Yehuda Katz (he
+is really awesome) stating that you should just open Vim and use it like a
+conventional editor (arrow keys, mouse, etc)
+<a href="http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/">the article</a>.</p>
+
+<p>That could have worked for him, and it has definitely worked for some of my
+friends also, but not for me, I had to follow the regular path of doing
+everything the vim way, disable arrow keys, disable mouse, and FORCE me to do
+everything on the way that Vim wanted me to do.</p>
+
+<h1>Where Am I At The Text Editing World</h1>
+
+<p>I am a Vim user, I use Vim for everything, I have Vim bindings on my Chrome, I
+love that the official OSX twitter client has Vim bindings, I love that Gmail
+and Sparrow (RIP) have it too. I don&#8217;t know how to navigate anything without <code>j</code>
+and <code>k</code>.</p>
+
+<p>I consider myself good at Vim, I use Vim modal editing to extreme, I am not one
+of those guys you get astonished when you see typing, tho.</p>
+
+<p>I have used plenty of text editors and IDEs in my life. Including Aptana (Rad
+Rails), Textmate, Red Car, Sublime Text 2, Chocolat, Emacs, etc. I have
+opinions about all of them, and wouldn&#8217;t feel unconfortable if I had to use some
+of the again (although there are some that I&#8217;d rather use a naked vi instead).</p>
+
+<h1>And What The Heck Is Your Opinion?</h1>
+
+<p>Each person has needs and preferences, and everyone is different, everyone has
+it&#8217;s own &#8220;soul mate&#8221; text editor. And while I do belive the text editor can
+affect the coding speed I don&#8217;t think it is significant to justify a text
+editor switch. <a href="http://lateral.netmanagers.com.ar/weblog/posts/your-editor-is-not-the-bottleneck.html">This guys</a>
+opinion is really valid and I agree in the most part.</p>
+
+<p>You should choose your editor based on your personal preferences (and I bet my
+kidney you are already doing it). For some it must be beautiful (a lot of
+people switch to OS X because it&#8217;s beautiful), for some it must be dead simple,
+for some it should be platform independent.</p>
+
+<p>The part I disagree from that post is that you can code in anything, even in
+kwrite. Even though you CAN, that really depends on the coder needs, I for
+example, NEED <code>ctags</code> and some sort of file jumping good. That given author does
+not need anything, so he can code in anything that accepts keyboard input and
+maybe has some syntax highlighting.</p>
+
+<h1>What I Am Trying To Say</h1>
+
+<p>I am trying to say that you can&#8217;t be wrong if you are getting your job done. If
+you feel like you can feel better on a different editor, or with more plugins,
+or on a massively slow crazy IDE then just go for it. People will always
+advocate for their own preferences and you can&#8217;t be judged for using something
+like kwrite, or eclipse, or emacs, or whatever (even though you will be), just
+get your job done right and good using the tools you feel more confortable
+with.</p>
+
+<p>Explore your possibilities, I think everyone should give Vim and Emcas a try.
+Both are awesome and have some different ways of doing things. Vims modal
+editing and macros will blow your mind. And Emacs control-driven commands will
+make your finger hurt. If you are on OS X you should take a look on Coda and
+Chocolat, they have such a cute UI.</p>
+
+<p>I want to finish this by listing my favorite pieces of work on text editing:</p>
+
+<ul>
+<li>Vim (MacVim)</li>
+<li>Sublime Text 2</li>
+<li>Chocolat</li>
+<li>Textmate</li>
+<li>Emacs</li>
+<li>Gedit</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Ember FormBuilder]]></title>
+    <link href="http://luan.github.com/2012/03/19/introducing-ember-formbuilder/"/>
+    <updated>2012-03-19T14:36:00-07:00</updated>
+    <id>http://luan.github.com/2012/03/19/introducing-ember-formbuilder</id>
+    <content type="html"><![CDATA[<p>I was hacking around with Ember.js and had to do a kind of complex form.
+All fields were bound to one object and I had a hard time styling and binding everything.
+While doing this I got myself thinking of <a href="https://github.com/plataformatec/simple_form">simple_form</a>
+and how it would be helping me if I could use it.</p>
+
+<p>And why not create a form builder for Ember? Yeah why not, I decided to try. I can&#8217;t say I failed
+miserably because the idea is cool, I like what I wrote in the <a href="https://github.com/luan/ember-formbuilder/blob/master/README.md">README</a>
+and how things are defined to work. But no doubt the code ended up a pile of crap,
+complicated, hard to understand and hard to evolve from.</p>
+
+<!-- more -->
+
+
+<p>This post is about the idea. And to tell you guys that I will now rewrite it (yeah I know,
+I&#8217;m rewriting a project that has what, 2 days life? But one should fail ASAP).</p>
+
+<p>Any help is appreciated, I&#8217;m really new to testing javascript (and to testing at all)
+but I&#8217;m finding my way in that. Now let&#8217;s talk about the form builder.</p>
+
+<h1>Ember FormBuilder</h1>
+
+<p>Based on simple_form primarily Ember FormBuilder aims to be the toolkit to build from basic to
+complex forms that binds automatically to your ember objects. It&#8217;s really customizable by just
+defining a mixin with your markup definitions, just like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">Bootstrap = </span><span class="nx">Ember</span><span class="p">.</span><span class="nx">Mixin</span><span class="p">.</span><span class="nx">create</span>
+</span><span class='line'>  <span class="nv">wrapperTag: </span><span class="s">&#39;div&#39;</span>
+</span><span class='line'>  <span class="nv">wrapperClass: </span><span class="s">&#39;control-group&#39;</span>
+</span><span class='line'>  <span class="nv">inputWrapperTag: </span><span class="s">&#39;div&#39;</span>
+</span><span class='line'>  <span class="nv">inputWrapperClass: </span><span class="s">&#39;controls&#39;</span>
+</span><span class='line'>  <span class="nv">labelClass: </span><span class="s">&#39;control-label&#39;</span>
+</span><span class='line'>  <span class="nv">helpTag: </span><span class="s">&#39;p&#39;</span>
+</span><span class='line'>  <span class="nv">helpClass: </span><span class="s">&#39;help-block&#39;</span>
+</span><span class='line'>  <span class="nv">errorTag: </span><span class="s">&#39;span&#39;</span>
+</span><span class='line'>  <span class="nv">errorClass: </span><span class="s">&#39;help-inline&#39;</span>
+</span><span class='line'>  <span class="nv">formClass: </span><span class="s">&#39;form-vertical&#39;</span>
+</span><span class='line'>  <span class="nv">submitClass: </span><span class="s">&#39;btn btn-success&#39;</span>
+</span><span class='line'>  <span class="nv">cancelClass: </span><span class="s">&#39;btn btn-danger&#39;</span>
+</span><span class='line'><span class="nx">Ember</span><span class="p">.</span><span class="nx">FormBuilder</span><span class="p">.</span><span class="nx">pushMixin</span><span class="p">(</span><span class="nx">Bootstrap</span><span class="p">,</span> <span class="s">&quot;bootstrap&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you are familiar to simple_form syntax the handlebars helpers we define will be just the
+thing you were looking for. You can define a form with <code>{{#formFor "object"}}</code> and define
+imputs with <code>{{input "name"}}</code>. As simple as that. You can find out more about it by reading
+the <a href="https://github.com/luan/ember-formbuilder/blob/master/README.md">README</a> on github.</p>
+
+<p>There is also support for some kind of internationalization, I say somekind because you
+set an object <code>Ember.FormBuilder.STRINGS</code> with some string values (again refer to README
+here) and you have to work your way to make it internationalized in there, it&#8217;s something
+to be thought further later, but that&#8217;s another subject for another time.</p>
+
+<h1>Ok</h1>
+
+<p>Yeah I mean, that&#8217;s the whole thing. I just wanted to show that. I will rewrite it now
+using decent patterns and making things more reusable and easier to understand. Will
+write decent unit tests and integration tests too, currently there is just a bunch of
+weird tests that I don&#8217;t belive that covers much of it.</p>
+
+<p>The code is in github <a href="https://github.com/luan/ember-formbuilder">here</a> and if you
+have time and want to help I would be delighted. Of course, read the README and
+point out flaws if you see some.</p>
+
+<p>Thanks for reading, good bye.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Facebook JS SDK with Ember.js]]></title>
+    <link href="http://luan.github.com/2012/03/06/using-facebook-js-sdk-with-emberjs/"/>
+    <updated>2012-03-06T10:25:00-08:00</updated>
+    <id>http://luan.github.com/2012/03/06/using-facebook-js-sdk-with-emberjs</id>
+    <content type="html"><![CDATA[<p>This is my first blog post and it will be as simple as that.</p>
+
+<h3>Using the ember-facebook library</h3>
+
+<p>I wrote a (<em>really</em>) simples addon for <a href="http://www.emberjs.com">Ember.js</a> to automatically load the <a href="https://developers.facebook.com/docs/reference/javascript/">facebook javascript sdk</a>, it&#8217;s called <a href="http://www.github.com/luan/ember-facebook">ember-facebook</a> as you&#8217;d expect.</p>
+
+<p>To use it you just have to download the compiled js file from the downloads page on the github repository. The library is written in <a href="http://coffeescript.org">CoffeeScript</a> and I do <a href="http://arcturo.github.com/library/coffeescript/">love CoffeeScript</a>.</p>
+
+<p><a href="https://github.com/downloads/luan/ember-facebook/ember-facebook.js">Download ember-facebook.js</a></p>
+
+<p>Once you done it include it right after the actual Ember.js file, and before your application one, do it as you are used to.</p>
+
+<p>Right now you can use it like this, on your application creation include the Facebook Mixin:</p>
+
+<figure class='code'><figcaption><span>Application Configuration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="nv">App = </span><span class="nx">Em</span><span class="p">.</span><span class="nx">Application</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Em</span><span class="p">.</span><span class="nx">Facebook</span><span class="p">)</span>
+</span><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">set</span> <span class="s">&#39;appId&#39;</span><span class="p">,</span> <span class="s">&#39;YourAppId&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>And it will graciously load the Facebook JS SDK for you, you don&#8217;t have to do anything else. Now you are able to use the <code>FB</code> object to call Facebook&#8217;s API, and we assigned a FBUser to your App to reffer to the logged in user.
+If you want a login button you can do something like this:</p>
+
+<figure class='code'><figcaption><span>Simple login/logout buttons</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{{#if App.FBUser}}
+</span><span class='line'>  <span class="nt">&lt;div&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;img</span> <span class="err">{{</span><span class="na">bindAttr</span> <span class="na">src=</span><span class="s">&quot;App.FBUser.picture&quot;</span> <span class="na">alt=</span><span class="s">&quot;App.FBUser.name&quot;</span><span class="err">}}</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    {{App.FBUser.name}}
+</span><span class='line'>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#&quot;</span> <span class="err">{{</span><span class="na">action</span> <span class="err">&quot;</span><span class="na">logout</span><span class="err">&quot;</span> <span class="na">target=</span><span class="s">&quot;FB&quot;</span><span class="err">}}</span><span class="nt">&gt;</span>Logout<span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>{{else}}
+</span><span class='line'>  {{#view Em.FacebookView type=&quot;login-button&quot; data-size=&quot;xlarge&quot;
+</span><span class='line'>                          data-scope=&quot;email, offline_access&quot;}}
+</span><span class='line'>    Connect
+</span><span class='line'>  {{/view}}
+</span><span class='line'>{{/if}}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that we are checking for the existance of App.FBUser and then displaying the user names and picture together with a logout link if the user is present OR we show a custom view called FacebookView that basically creates a view of the Facebook SDK, you can check more on their documentation.</p>
+
+<p>Basically we create a button with the xlarge size and ask for the scopes &#8220;email&#8221; and &#8220;offline_access&#8221; with the content &#8220;Connect&#8221;.</p>
+
+<p>You can customize it however. You could either create a link to that, just bindint the action &#8220;login&#8221; to the target &#8220;FB&#8221; (as we did with logout).</p>
+
+<h3>Creating the ember-facebook library</h3>
+
+<p>The <a href="https://github.com/luan/ember-facebook/blob/master/src/ember-facebook.coffee">sources</a> for the library are really really simple. I basically observes the &#8220;appId&#8221; attribute and when that changes it loads the Facebook JS SDK for that app.</p>
+
+<p>Whenever the user changes (login, logout, app authorization, etc) the method <code>updateFBUser</code> is called, updating the App.FBUser object on your application. You can do whatever you want with this binding, observe it, put it in the DOM, whatever.</p>
+
+<p>We also have a App.FBloading binding which is a boolean that basically tells that we are waiting a facebook response.</p>
+
+<p>You might want to show something based on this:</p>
+
+<figure class='code'><figcaption><span>Fancy Loading</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{{#if App.FBloading}}
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;my-fancy-loading&quot;</span><span class="nt">&gt;</span>Waiting for Facebook<span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>{{/if}}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>That&#8217;s all folks</h3>
+
+<p>I hope you like it, as it being my first post it might look retarded, but I hope it was helpful for someone.</p>
+
+<p>See ya!</p>
+]]></content>
+  </entry>
+  
+</feed>

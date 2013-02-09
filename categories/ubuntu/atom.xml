@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ubuntu | Luan Santos]]></title>
+  <link href="http://luan.github.com/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://luan.github.com/"/>
+  <updated>2013-02-09T02:05:31-08:00</updated>
+  <id>http://luan.github.com/</id>
+  <author>
+    <name><![CDATA[Luan Santos]]></name>
+    <email><![CDATA[luan@luansantos.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying Rails Applications With Mina]]></title>
+    <link href="http://luan.github.com/2012/09/05/deploying-rails-applications-with-mina/"/>
+    <updated>2012-09-05T18:56:00-07:00</updated>
+    <id>http://luan.github.com/2012/09/05/deploying-rails-applications-with-mina</id>
+    <content type="html"><![CDATA[<p></p>
+
+<p>I recently participated on <a href="http://startupdev.com.br/rumble/pt/">StartupDEV Rumble</a>
+with my friend <a href="http://raphaelcosta.net">Raphael Costa</a>. Where we had to develop
+and deploy a web application in 48 hours.</p>
+
+<p>Besides being an awesome experience I learned a new deployment tool which is
+really awesome: Mina.</p>
+
+<!-- more -->
+
+
+<p><a href="http://nadarei.co/mina/">Mina</a> is an awesome tool that deploys your application
+blazingly fast, over a single ssh connection.</p>
+
+<p>The first thing you have to do is set-up your VPS which should be easy enough,
+there are plenty of guides around.</p>
+
+<p>I just wanna share my Mina configuration for now.</p>
+
+<p>First, add mina to your gemfile:</p>
+
+<p><code>ruby
+gem 'mina'
+</code></p>
+
+<p>Then create a file on <code>config/</code> folder call it <code>deploy.rb</code> with these contents
+(watch for CAPS for where you have to change).</p>
+
+<p>```ruby
+require 'mina/bundler'
+require 'mina/rails'
+require 'mina/git'</p>
+
+<h1>Basic settings:</h1>
+
+<h1>domain     - The hostname to SSH to</h1>
+
+<h1>deploy_to  - Path to deploy into</h1>
+
+<h1>repository - Git repo to clone from (needed by mina/git)</h1>
+
+<h1>user       - Username in the  server to SSH to (optional)</h1>
+
+<p>set :shared_paths, [
+  'config/database.yml',
+  'config/settings/production.yml',
+  'log/production.log',
+  'log/unicorn.log',
+  'public/system',
+  'public/uploads'
+]</p>
+
+<p>set :domain, 'YOUR_APP_DOMAIN'
+set :deploy_to, 'YOUR_APP_FOLDER'
+set :repository, 'YOUR_GIT_REPO'
+set :user, 'deployer'</p>
+
+<p>desc "Deploys the current version to the server."
+task :deploy do
+  deploy do</p>
+
+<pre><code># Put things that will set up an empty directory into a fully set-up
+# instance of your project.
+invoke :'git:clone'
+invoke :'deploy:link_shared_paths'
+invoke :'bundle:install'
+invoke :'rails:db_migrate'
+invoke :'rails:assets_precompile'
+
+to :launch do
+  # WATCH HERE FOR YOUR UNICORN/SERVER service
+  queue 'touch tmp/restart.txt'
+  queue 'service unicorn restart'
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>desc "Shows logs."
+task :logs do
+  queue %[cd #{deploy_to!} &amp;&amp; tail -f shared/log/production.log]
+end
+```</p>
+
+<p>And really, that's all there's to it, I might post a full deploy guide soon if
+someone ask for it.</p>
+
+<p></p>
+]]></content>
+  </entry>
+  
+</feed>
