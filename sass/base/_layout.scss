@@ -7,9 +7,12 @@ $max-width: 1000px;
 body{
 	font-family: $font-default;
 	font-weight: 300;
-	font-size: 14px;
-	background: $color-background;
+	font-size: 16px;
 	color: $color-gray01;
+  background: $color-background;
+  @media screen and (min-width: 1340px) {
+    background: $color-background url('/assets/background.png') no-repeat top left;
+  }
 	@media screen and (max-width: 1040px){
 		margin: 0 20px;
 	}

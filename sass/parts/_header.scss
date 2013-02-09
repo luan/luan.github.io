@@ -22,6 +22,16 @@ $header-height: 30px;
 		float: left;
 		font-weight: 300;
 		font-size: 30px;
+    @media screen and (min-width: 1340px) {
+      a {
+        color: white;
+        text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+        &:hover{
+          color: white;
+          text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
 		@media screen and (max-width: 1040px){
 			float: none;
 		}
@@ -385,6 +395,7 @@ $header-height: 30px;
   -webkit-box-shadow: 0 0 1px black;
   -moz-box-shadow: 0 0 1px black;
   box-shadow: 0 0 1px black;
+  background: rgba(255, 255, 255, .75);
   height: 152px;
   margin: auto;
   margin-bottom: 10px;
